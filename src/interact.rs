@@ -1,5 +1,5 @@
 use std::{error::Error, io};
-use super::interact;
+use super::{interact, VERSION};
 use textwrap::{fill, termwidth};
 
 /// Print to the width of the terminal.
@@ -21,8 +21,8 @@ pub fn read_number() -> Result<u32, Box<dyn Error>> {
 
 /// Print the instructions
 pub fn instructions() -> Result<(), Box<dyn Error>> {
-    print_width("\n    SANTA RUSTAVIA\n\
-        \nDo you wish to read the instructions? (Y/N)");
+    print_width(&format!("\n    SANTA RUSTAVIA (v{})\n\
+        \nDo you wish to read the instructions? (Y/N)", VERSION.unwrap_or("")));
 
     let mut entry = String::new();
     io::stdin().read_line(&mut entry)?;

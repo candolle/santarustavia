@@ -9,6 +9,8 @@ use rand::{rngs::ThreadRng, thread_rng};
 use std::{collections::VecDeque, error::Error, io};
 use textwrap::termwidth;
 
+const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
+
 fn introduce<'a>(level: u8, city: &'a Cities, rng: &mut ThreadRng) -> Result<Player<'a>, Box<dyn Error>> {
     interact::print_width(&format!(
         "\nWho will be the ruler of {}?",
@@ -54,9 +56,6 @@ fn play(players: &mut Vec<Player>, rng: &mut ThreadRng) -> Result<(), Box<dyn Er
                 round_live.push_back(player);
             }
         }
-
-        // TODO: sort by dead to get a mutable slice of live players
-        // TODO: with indexes iterate over
 
         if !round_live.is_empty() {
             // Give a turn to each player still in the game
